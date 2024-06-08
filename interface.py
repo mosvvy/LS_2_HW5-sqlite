@@ -46,7 +46,17 @@ def menu_register():
 
 @menu.add_handler('2', 'Увійти')
 def menu_login():
-    pass
+    """Якщо користувач обирає увійти, програма має запитати username та password,
+    потім перевірити, чи існує такий користувач у базі даних.
+    Якщо так, вивести повідомлення "Успішний вхід!", інакше - "Неправильні дані!" """
+    username = input('Введіть ім\'я користувача: ')
+    password = input('Введіть пароль: ')
+    new_user = User(username, password, None)
+    login_result = new_user.login(username, password)
+    if login_result:
+        print('Успішний вхід!')
+    else:
+        print('Неправильні дані!')
 
 
 @menu.add_handler('3', 'Вийти')
