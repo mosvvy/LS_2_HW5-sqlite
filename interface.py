@@ -25,6 +25,7 @@ class Menu:
             if choice == '3':
                 break
             func, _ = self.__menu_items.get(choice, (default, ''))
+            func()
 
 
 menu = Menu()
@@ -55,3 +56,7 @@ def menu_exit():
 
 def default():
     print('Невідома дія. Будь-ласка, спробуйте ще раз.')
+
+
+if __name__ == '__main__':
+    menu.run()
