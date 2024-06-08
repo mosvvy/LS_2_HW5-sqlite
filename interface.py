@@ -1,3 +1,6 @@
+from user import User
+
+
 class Menu:
     def __init__(self):
         self.__menu_items = {}
@@ -26,10 +29,18 @@ class Menu:
 
 menu = Menu()
 
+
 # TODO realize functions for actions
 @menu.add_handler('1', 'Зареєструватися')
 def menu_register():
-    pass
+    """Якщо користувач обирає зареєструватися, програма має
+    запитати username, password та email,
+    створити нового користувача і зберегти його в базу даних."""
+    username = input('Введіть ім\'я користувача: ')
+    password = input('Введіть пароль: ')
+    email = input('Введіть адресу ел.пошти: ')
+    new_user = User(username, password, email)
+    new_user.register()
 
 
 @menu.add_handler('2', 'Увійти')
@@ -44,4 +55,3 @@ def menu_exit():
 
 def default():
     print('Невідома дія. Будь-ласка, спробуйте ще раз.')
-
