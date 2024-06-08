@@ -20,18 +20,19 @@ class Menu:
         return wrapper
 
     def run(self):
-        while True:
+        is_continue = True
+        while is_continue:
             choice = self.__get_choice()
-            if choice == '3':
-                break
             func, _ = self.__menu_items.get(choice, (default, ''))
-            func()
+            res = func()
+            if choice == '3':
+                is_continue = res
 
 
 menu = Menu()
 
 
-# TODO realize functions for actions
+# TODO checks and catches
 @menu.add_handler('1', 'Зареєструватися')
 def menu_register():
     """Якщо користувач обирає зареєструватися, програма має
@@ -61,7 +62,7 @@ def menu_login():
 
 @menu.add_handler('3', 'Вийти')
 def menu_exit():
-    pass
+    return False
 
 
 def default():
