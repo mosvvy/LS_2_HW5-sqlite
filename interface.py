@@ -7,8 +7,7 @@ class Menu:
         for cmd, (_, description) in self.__menu_items.items():
             print(f'{cmd} - {description}')
 
-        print('0 - Exit')
-        return input('Enter number in brackets: ')
+        return input('Введіть номер дії: ')
 
     def add_handler(self, cmd, description):
         def wrapper(func):
@@ -20,16 +19,29 @@ class Menu:
     def run(self):
         while True:
             choice = self.__get_choice()
-            if choice == '0':
+            if choice == '3':
                 break
             func, _ = self.__menu_items.get(choice, (default, ''))
 
 
 menu = Menu()
 
-# TODO functions for actions
+# TODO realize functions for actions
+@menu.add_handler('1', 'Зареєструватися')
+def menu_register():
+    pass
+
+
+@menu.add_handler('2', 'Увійти')
+def menu_login():
+    pass
+
+
+@menu.add_handler('3', 'Вийти')
+def menu_exit():
+    pass
 
 
 def default():
-    print('Something went wrong! Try again please.')
+    print('Невідома дія. Будь-ласка, спробуйте ще раз.')
 
