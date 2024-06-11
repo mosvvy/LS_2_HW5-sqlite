@@ -1,3 +1,5 @@
+import re
+
 from user import User
 
 
@@ -30,6 +32,17 @@ class Menu:
 menu = Menu()
 
 
+def add_email():
+    pattern = r'[a-zA-Z0-9]*@[a-zA-Z0-9]{2,10}.[a-zA-Z0-9]{2,4}'
+    while True:
+        value = input('Введіть адресу ел.пошти: ')
+        if value == '':
+            break
+        if re.match(pattern, value):
+            return value
+        print('Пошта невалідна. Будь-ласка спробуйте ще раз.\n\tПустий рядок скасує реєстрацію.')
+
+
 # TODO checks and catches
 @menu.add_handler('1', 'Зареєструватися')
 def menu_register():
@@ -38,7 +51,9 @@ def menu_register():
     створити нового користувача і зберегти його в базу даних."""
     username = input("Введіть ім'я користувача: ")
     password = input('Введіть пароль: ')
-    email = input('Введіть адресу ел.пошти: ')
+    email = add_email()
+    if not email:
+        return True
     new_user = User(username, password, email)
     new_user.register()
     return True
