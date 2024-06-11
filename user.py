@@ -30,6 +30,14 @@ class User:
         del con
         return bool(r[0][0])
 
+    @staticmethod
+    def show_all():
+        con = SQLiteConnector()
+        con.cursor.execute(f"SELECT username, password, email FROM users")
+        r = con.cursor.fetchall()
+        del con
+        return r
+
 
 if __name__ == '__main__':
     user1 = User('uname1', 'qwerty', 'qwerty@ex.com')
