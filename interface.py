@@ -66,6 +66,17 @@ def menu_exit():
     return False
 
 
+@menu.add_handler('0', 'Показати всіх користувачів')
+def menu_show_all():
+    """Допоміжна функція, що виводить інформацію про найвних користувачів."""
+    pattern = '{:>20} | {:<20} | {}'
+    print(pattern.format('username', 'password', 'email'))
+    print(pattern.format('-'*20, '-'*20, '-'*20))
+    for user in User.show_all():
+        print(pattern.format(user[0], user[1], user[2]))
+    return True
+
+
 def default():
     print('Невідома дія. Будь-ласка, спробуйте ще раз.')
     return True
