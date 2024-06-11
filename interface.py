@@ -24,9 +24,7 @@ class Menu:
         while is_continue:
             choice = self.__get_choice()
             func, _ = self.__menu_items.get(choice, (default, ''))
-            res = func()
-            if choice == '3':
-                is_continue = res
+            is_continue = func()
 
 
 menu = Menu()
@@ -43,6 +41,7 @@ def menu_register():
     email = input('Введіть адресу ел.пошти: ')
     new_user = User(username, password, email)
     new_user.register()
+    return True
 
 
 @menu.add_handler('2', 'Увійти')
@@ -58,15 +57,18 @@ def menu_login():
         print('Успішний вхід!')
     else:
         print('Неправильні дані!')
+    return True
 
 
 @menu.add_handler('3', 'Вийти')
 def menu_exit():
+    """Якщо користувач обирає вийти, програма має завершити роботу."""
     return False
 
 
 def default():
     print('Невідома дія. Будь-ласка, спробуйте ще раз.')
+    return True
 
 
 if __name__ == '__main__':
