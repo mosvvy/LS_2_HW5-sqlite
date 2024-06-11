@@ -51,7 +51,7 @@ def menu_login():
     Якщо так, вивести повідомлення "Успішний вхід!", інакше - "Неправильні дані!" """
     username = input("Введіть ім'я користувача: ")
     password = input('Введіть пароль: ')
-    new_user = User(username, password, None)
+    new_user = User(username, password)
     login_result = new_user.login(username, password)
     if login_result:
         print('Успішний вхід!')
