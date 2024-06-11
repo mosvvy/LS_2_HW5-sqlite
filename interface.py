@@ -36,7 +36,7 @@ def menu_register():
     """Якщо користувач обирає зареєструватися, програма має
     запитати username, password та email,
     створити нового користувача і зберегти його в базу даних."""
-    username = input('Введіть ім\'я користувача: ')
+    username = input("Введіть ім'я користувача: ")
     password = input('Введіть пароль: ')
     email = input('Введіть адресу ел.пошти: ')
     new_user = User(username, password, email)
@@ -49,7 +49,7 @@ def menu_login():
     """Якщо користувач обирає увійти, програма має запитати username та password,
     потім перевірити, чи існує такий користувач у базі даних.
     Якщо так, вивести повідомлення "Успішний вхід!", інакше - "Неправильні дані!" """
-    username = input('Введіть ім\'я користувача: ')
+    username = input("Введіть ім'я користувача: ")
     password = input('Введіть пароль: ')
     new_user = User(username, password, None)
     login_result = new_user.login(username, password)
