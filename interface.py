@@ -1,3 +1,5 @@
+import re
+
 from user import User
 
 
@@ -30,15 +32,28 @@ class Menu:
 menu = Menu()
 
 
+def add_email():
+    pattern = r'[a-zA-Z0-9]*@[a-zA-Z0-9]{2,10}.[a-zA-Z0-9]{2,4}'
+    while True:
+        value = input('Введіть адресу ел.пошти: ')
+        if value == '':
+            break
+        if re.match(pattern, value):
+            return value
+        print('Пошта невалідна. Будь-ласка спробуйте ще раз.\n\tЕлектронна адреса має складатися з латинських літер та цифр, мфти комерційну ет та крапку\n\tПустий рядок скасує реєстрацію.')
+
+
 # TODO checks and catches
 @menu.add_handler('1', 'Зареєструватися')
 def menu_register():
     """Якщо користувач обирає зареєструватися, програма має
     запитати username, password та email,
     створити нового користувача і зберегти його в базу даних."""
-    username = input('Введіть ім\'я користувача: ')
+    username = input("Введіть ім'я користувача: ")
     password = input('Введіть пароль: ')
-    email = input('Введіть адресу ел.пошти: ')
+    email = add_email()
+    if not email:
+        return True
     new_user = User(username, password, email)
     new_user.register()
     return True
@@ -49,9 +64,9 @@ def menu_login():
     """Якщо користувач обирає увійти, програма має запитати username та password,
     потім перевірити, чи існує такий користувач у базі даних.
     Якщо так, вивести повідомлення "Успішний вхід!", інакше - "Неправильні дані!" """
-    username = input('Введіть ім\'я користувача: ')
+    username = input("Введіть ім'я користувача: ")
     password = input('Введіть пароль: ')
-    new_user = User(username, password, None)
+    new_user = User(username, password)
     login_result = new_user.login(username, password)
     if login_result:
         print('Успішний вхід!')

@@ -1,8 +1,10 @@
+from sqlite3 import IntegrityError
+
 from sqlite_connector import SQLiteConnector
 
 
 class User:
-    def __init__(self, username, password, email):
+    def __init__(self, username, password, email=None):
         """Ініціалізує нового користувача з переданими username, password та email."""
         self._username = username
         self._password = password
@@ -15,8 +17,11 @@ class User:
         #     con.cursor.execute("")
         #     con.commit()
         con = SQLiteConnector()
-        con.cursor.execute(f"INSERT INTO users (username, password, email) VALUES ('{self._username}', '{self._password}', '{self._email}')")
-        con.commit()
+        try:
+            con.cursor.execute(f"INSERT INTO users (username, password, email) VALUES ('{self._username}', '{self._password}', '{self._email}')")
+            con.commit()
+        except IntegrityError:
+            print(f'Користувач з іменем "{self._username}" вже існує!')
         del con
 
     def login(self, username, password):
